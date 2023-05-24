@@ -1,6 +1,5 @@
 # This is a sample Python script.
 import matplotlib.pyplot as plt
-
 from filters import ImageFilter
 import cv2
 # Press Shift+F10 to execute it or replace it with your code.
@@ -10,8 +9,10 @@ import cv2
 if __name__ == '__main__':
     img_filter = ImageFilter()
     img_filter.read_imgs()
-    img_filter.hls_filter()
-    img_filter.binary_filter()
-    img_filter.blended_filter()
-    img_filter.morphology_filter()
-    print(img_filter.morphology_imgs[0])
+    hls = img_filter.hls_filter()[0]
+    binary = img_filter.binary_filter()[0]
+    blended = img_filter.blended_filter()[0]
+    morphology = img_filter.morphology_filter()[0]
+    img_filter.save_imgs([hls,binary,blended,morphology],'resultImages')
+    # plt.imshow(img_filter.hls_imgs[0])
+    # plt.show()

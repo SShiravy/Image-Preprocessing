@@ -42,5 +42,16 @@ class ImageFilter:
     def morphology_filter(self,img_list=None):
         img_list = self.blended if img_list is None else img_list
         for blended_img in img_list:
-            self.morphology_imgs.append(cv2.morphologyEx(blended_img, cv2.MORPH_GRADIENT, np.ones((4, 4), np.uint8)))
+            self.morphology_imgs.append(cv2.morphologyEx(blended_img, cv2.MORPH_GRADIENT, np.ones((2,2), np.uint8)))
         return self.morphology_imgs
+
+    def save_imgs(self,list_images,dir,pre_name='test_filters'):
+        i = 1
+        try:
+            for img in list_images:
+                cv2.imwrite(f'{dir}/{pre_name}_{i}.png', img)
+                i+=1
+            return True
+        except:
+            return False
+
