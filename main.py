@@ -14,4 +14,4 @@ if __name__ == '__main__':
     img_filter.binary_filter()
     img_filter.blended_filter()
     img_filter.morphology_filter()
-    print(img_filter.binary_imgs[0])
+    print(img_filter.morphology_imgs[0])

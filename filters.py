@@ -20,27 +20,27 @@ class ImageFilter:
 
     def hls_filter(self,img_list=None):
         img_list = self.images if img_list is None else img_list
-        for img in self.images:
+        for img in img_list:
             self.hls_imgs.append(cv2.cvtColor(img, cv2.COLOR_RGB2HLS))
         return self.hls_imgs
 
     def binary_filter(self,img_list=None):
         img_list = self.images if img_list is None else img_list
-        for img in self.images:
+        for img in img_list:
             _, binary_imgs = cv2.threshold(img, img.max() / 2, img.max(), cv2.THRESH_BINARY)
             self.binary_imgs.append(binary_imgs)
         return self.binary_imgs
 
     def blended_filter(self,img_list=None):
         img_list = self.images if img_list is None else img_list
-        for img in self.images:
+        for img in img_list:
             sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=5)
             sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5)
             self.blended.append(cv2.addWeighted(src1=sobelx, alpha=0.5, src2=sobely, beta=0.5, gamma=0))
         return self.blended
 
     def morphology_filter(self,img_list=None):
-        img_list = self.images if img_list is None else img_list
-        for blended_img in self.blended:
+        img_list = self.blended if img_list is None else img_list
+        for blended_img in img_list:
             self.morphology_imgs.append(cv2.morphologyEx(blended_img, cv2.MORPH_GRADIENT, np.ones((4, 4), np.uint8)))
         return self.morphology_imgs
